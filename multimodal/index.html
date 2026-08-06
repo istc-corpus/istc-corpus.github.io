@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>冰雪旅游多模态语料库展示平台</title>
+
+
+<style>
+
+
+body{
+
+    font-family:
+    "Microsoft YaHei",
+    Arial,
+    sans-serif;
+
+    background:#f5f8fc;
+
+    margin:30px;
+
+}
+
+
+
+h1{
+
+    text-align:center;
+
+}
+
+
+
+.search-box{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+
+
+input{
+
+    width:350px;
+
+    padding:8px;
+
+    font-size:16px;
+
+}
+
+
+
+button{
+
+    padding:8px 18px;
+
+}
+
+
+
+.post{
+
+    background:white;
+
+    padding:20px;
+
+    margin-bottom:30px;
+
+    border-radius:12px;
+
+    box-shadow:
+    0 2px 10px rgba(0,0,0,0.1);
+
+}
+
+
+
+.note-id{
+
+    color:#888;
+
+    font-size:14px;
+
+}
+
+
+
+.title{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin:10px 0;
+
+}
+
+
+
+.text{
+
+    line-height:1.8;
+
+}
+
+
+
+
+/* =====================
+图片区域
+===================== */
+
+
+.image-container{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+}
+
+
+
+.image-box{
+
+    width:230px;
+
+}
+
+
+
+.image-box img{
+
+    width:220px;
+
+    height:auto;
+
+    border-radius:8px;
+
+}
+
+
+
+.annotation{
+
+    background:#eef6ff;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+
+
+.label{
+
+    color:#2672ff;
+
+    font-weight:bold;
+
+}
+
+
+
+/* =====================
+视频区域
+===================== */
+
+
+.video-box{
+
+    margin-top:20px;
+
+}
+
+
+
+.video-player{
+
+    width:520px;
+
+    max-width:100%;
+
+}
+
+
+
+.video-annotation{
+
+    width:520px;
+
+    max-width:100%;
+
+    margin-top:15px;
+
+    background:#fff7e8;
+
+    padding:15px;
+
+    border-radius:8px;
+
+}
+
+
+
+
+.highlight{
+
+    background:yellow;
+
+    color:red;
+
+    font-weight:bold;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<h1>
+
+冰雪旅游多模态语料库展示平台
+
+</h1>
+
+
+
+
+<div class="search-box">
+
+
+<input
+
+id="search"
+
+placeholder="请输入关键词">
+
+
+<button onclick="searchPost()">
+
+检索
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="container"></div>
+
+
+
+
+
+
+
+<script>
+
+
+let posts=[];
+
+
+
+
+// ======================
+// 读取JSON
+// ======================
+
+
+fetch("multimodal_index.json")
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+posts=data;
+
+
+render(posts);
+
+
+})
+
+
+.catch(error=>{
+
+
+document.getElementById("container").innerHTML=
+
+"数据加载失败："+error;
+
+
+});
+
+
+
+
+
+
+
+// ======================
+// 页面生成
+// ======================
+
+
+function render(data){
+
+
+
+let container=document.getElementById("container");
+
+
+container.innerHTML="";
+
+
+
+data.forEach(post=>{
+
+
+let html=`
+
+
+
+<div class="post">
+
+
+<div class="note-id">
+
+Note ID：
+
+${post.note_id}
+
+</div>
+
+
+
+
+<div class="title">
+
+${post.title}
+
+</div>
+
+
+
+
+<div class="text">
+
+${post.text.replace(/\n/g,"<br>")}
+
+</div>
+
+
+
+
+
+`;
+
+
+
+
+
+// ======================
+// 图片
+// ======================
+
+
+if(post.images && post.images.length>0){
+
+
+html+=`
+
+<h3>
+
+图片资源
+
+</h3>
+
+
+<div class="image-container">
+
+
+`;
+
+
+
+post.images.forEach(img=>{
+
+
+
+html+=`
+
+
+<!-- 原图 -->
+
+
+<div class="image-box">
+
+
+<p>
+
+原图
+
+</p>
+
+
+
+<img src="${img.original}">
+
+
+</div>
+
+
+
+
+<!-- 标注图 -->
+
+
+<div class="image-box">
+
+
+<p>
+
+标注图
+
+</p>
+
+
+<img src="${img.marked}">
+
+
+
+<div class="annotation">
+
+
+`;
+
+
+
+
+for(let key in img.annotations){
+
+
+
+html+=`
+
+
+<p>
+
+<span class="label">
+
+${key}：
+
+</span>
+
+
+${img.annotations[key].join("、")}
+
+
+</p>
+
+
+`;
+
+
+
+}
+
+
+
+html+=`
+
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+
+html+=`
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+// ======================
+// 视频
+// ======================
+
+
+if(post.videos && post.videos.length>0){
+
+
+
+html+=`
+
+<h3>
+
+视频资源
+
+</h3>
+
+
+`;
+
+
+
+post.videos.forEach((video,index)=>{
+
+
+
+html+=`
+
+
+
+<div class="video-box">
+
+
+
+<video
+
+class="video-player"
+
+controls
+
+data-id="${post.note_id}-${index}"
+
+>
+
+
+<source
+
+src="${video.path}"
+
+type="video/mp4">
+
+
+您的浏览器不支持视频播放。
+
+
+</video>
+
+
+
+
+
+<div class="video-annotation">
+
+
+当前时间无标注
+
+
+</div>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+html+=`
+
+
+</div>
+
+
+`;
+
+
+
+container.innerHTML+=html;
+
+
+
+});
+
+
+
+
+
+// 视频监听
+
+bindVideo();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ======================
+// 视频动态标注
+// ======================
+
+
+
+function bindVideo(){
+
+
+
+document.querySelectorAll(".video-player")
+
+.forEach((video)=>{
+
+
+
+let postId=video.dataset.id;
+
+
+
+let noteId=postId.split("-")[0];
+
+
+let index=Number(postId.split("-")[1]);
+
+
+
+let post=posts.find(
+
+p=>p.note_id===noteId
+
+);
+
+
+
+if(!post || !post.videos[index]){
+
+return;
+
+}
+
+
+
+let annotations=
+
+post.videos[index].annotations;
+
+
+
+let box=
+
+video.nextElementSibling;
+
+
+
+
+
+
+video.addEventListener(
+
+"timeupdate",
+
+function(){
+
+
+
+let current=this.currentTime;
+
+
+
+let html="";
+
+
+
+
+
+annotations.forEach(a=>{
+
+
+
+if(
+
+current>=Number(a.start)
+
+&&
+
+current<=Number(a.end)
+
+){
+
+
+
+html+=`
+
+<p>
+
+
+<span class="label">
+
+${a.type}：
+
+</span>
+
+
+${a.text}
+
+
+</p>
+
+
+`;
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+if(html===""){
+
+
+html="当前时间无标注";
+
+
+}
+
+
+
+box.innerHTML=html;
+
+
+
+});
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ======================
+// 搜索
+// ======================
+
+
+function searchPost(){
+
+
+let q=
+
+document.getElementById("search").value;
+
+
+
+if(!q){
+
+
+render(posts);
+
+
+return;
+
+
+}
+
+
+
+
+let result=posts.filter(post=>{
+
+
+return (
+
+post.title.includes(q)
+
+||
+
+post.text.includes(q)
+
+);
+
+
+});
+
+
+
+render(result);
+
+
+
+}
+
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>

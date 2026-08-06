@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences version="1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/Prefs_v1.1.xsd">
+    <pref key="FrameSize">
+        <Object class="java.awt.Dimension">1280,752</Object>
+    </pref>
+    <pref key="LayoutManager.SelectedTabIndex">
+        <Int>6</Int>
+    </pref>
+    <pref key="LayoutManager.VisibleMultiTierViewer">
+        <String>mpi.eudico.client.annotator.viewer.TimeLineViewer</String>
+    </pref>
+    <pref key="MultiTierViewer.ActiveTierName">
+        <String>场景信息</String>
+    </pref>
+    <pref key="LayoutManager.MediaAreaHeight">
+        <Int>390</Int>
+    </pref>
+    <pref key="SelectionEndTime">
+        <Long>18900</Long>
+    </pref>
+    <pref key="ExportTabDialog.SelectTiersMode">
+        <String>Tier</String>
+    </pref>
+    <prefList key="ExportTabDialog.TierOrder">
+        <String>场景信息</String>
+        <String>主体对象</String>
+        <String>行为事件</String>
+        <String>语言信息</String>
+    </prefList>
+    <pref key="LayoutManager.CurrentMode">
+        <Int>1</Int>
+    </pref>
+    <prefGroup key="CommentViewer.Columns">
+        <pref key="首字母">
+            <Int>75</Int>
+        </pref>
+        <pref key="结束日期">
+            <Int>75</Int>
+        </pref>
+        <pref key="层">
+            <Int>75</Int>
+        </pref>
+        <pref key="接受者">
+            <Int>0</Int>
+        </pref>
+        <pref key="开始时间">
+            <Int>75</Int>
+        </pref>
+        <pref key="执行过程">
+            <Int>75</Int>
+        </pref>
+        <pref key="发送者">
+            <Int>0</Int>
+        </pref>
+        <pref key="创建日期">
+            <Int>75</Int>
+        </pref>
+        <pref key="修改日期">
+            <Int>75</Int>
+        </pref>
+        <pref key="注释">
+            <Int>75</Int>
+        </pref>
+    </prefGroup>
+    <prefList key="ExportTabDialog.selectedTiers">
+        <String>场景信息</String>
+        <String>主体对象</String>
+        <String>行为事件</String>
+        <String>语言信息</String>
+    </prefList>
+    <prefList key="CommentViewer.Columns.Order">
+        <String>开始时间</String>
+        <String>结束日期</String>
+        <String>层</String>
+        <String>首字母</String>
+        <String>注释</String>
+        <String>执行过程</String>
+        <String>发送者</String>
+        <String>接受者</String>
+        <String>创建日期</String>
+        <String>修改日期</String>
+    </prefList>
+    <pref key="MediaControlVolume">
+        <Float>1.0</Float>
+    </pref>
+    <pref key="ActiveRecognizerName">
+        <String>BAS - WebMAUS Basic</String>
+    </pref>
+    <pref key="FrameLocation">
+        <Object class="java.awt.Point">0,0</Object>
+    </pref>
+    <pref key="TimeLineViewer.ZoomLevel">
+        <Float>79.0</Float>
+    </pref>
+    <pref key="SelectionBeginTime">
+        <Long>15797</Long>
+    </pref>
+    <prefList key="MultiTierViewer.HiddenTiers"/>
+    <prefGroup key="BAS - WebMAUS Basic">
+        <pref key="LANGUAGE">
+            <String>deu-DE</String>
+        </pref>
+        <prefGroup key="TierUrl"/>
+        <pref key="SignalParamName">
+            <String>SIGNAL</String>
+        </pref>
+        <pref key="ServiceName">
+            <String>runMAUSBasic</String>
+        </pref>
+        <pref key="TextParamName">
+            <String>TEXT</String>
+        </pref>
+    </prefGroup>
+    <pref key="TimeScaleBeginTime">
+        <Long>10241</Long>
+    </pref>
+    <pref key="MediaTime">
+        <Long>17354</Long>
+    </pref>
+    <prefGroup key="TierColors">
+        <pref key="场景信息">
+            <Object class="java.awt.Color">0,90,160</Object>
+        </pref>
+        <pref key="主体对象">
+            <Object class="java.awt.Color">90,160,90</Object>
+        </pref>
+        <pref key="语言信息">
+            <Object class="java.awt.Color">90,0,90</Object>
+        </pref>
+        <pref key="行为事件">
+            <Object class="java.awt.Color">90,160,160</Object>
+        </pref>
+    </prefGroup>
+    <prefList key="MultiTierViewer.TierOrder">
+        <String>场景信息</String>
+        <String>主体对象</String>
+        <String>行为事件</String>
+        <String>语言信息</String>
+    </prefList>
+    <pref key="LayoutManager.SplitPaneDividerLocation">
+        <Int>1</Int>
+    </pref>
+    <prefList key="ExportTabDialog.HiddenTiers"/>
+    <prefList key="CommentViewer.Columns.Hidden">
+        <String>接受者</String>
+        <String>发送者</String>
+    </prefList>
+</preferences>
